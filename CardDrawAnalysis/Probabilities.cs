@@ -15,9 +15,11 @@ namespace CardDrawAnalysis
 
     internal class Probabilities
     {
-        private int _minCardCount = 1;
-        private int _maxCardCount = 28;
         private int _deckSize = 60;
+        private int _minCardCount = 1;
+        private int _maxCardCount = 32;
+        private int _minCardsInHand = 1;
+        private int _maxCardsInHand = 16;
 
         private double[][][] _drawChanceArray;
         private double[][][] _cardsInHandProbabilityArray;
@@ -26,16 +28,18 @@ namespace CardDrawAnalysis
         private double[][][] _cardsInHandProbabilityArrayAtLeast;
         private double[][][] _cardsInHandProbabilityArrayAtMost;
 
-        private int _minCardsInHand = 1;
-        private int _maxCardsInHand = 17;
-
-        public Probabilities(int deckSize = 60, int minCardCount = 1, int maxCardCount = 28, int minCardsInHand = 1, int maxCardsInHand = 17)
+        public Probabilities(int? deckSize = null, int? minCardCount = null, int? maxCardCount = null, int? minCardsInHand = null, int? maxCardsInHand = null)
         {
-            _deckSize = deckSize;
-            _minCardCount = minCardCount;
-            _maxCardCount = maxCardCount;
-            _minCardsInHand = minCardsInHand;
-            _maxCardsInHand = maxCardsInHand;
+            if(deckSize.HasValue)
+                _deckSize = deckSize.Value;
+            if(minCardCount.HasValue)
+                _minCardCount = minCardCount.Value;
+            if(maxCardCount.HasValue)
+                _maxCardCount = maxCardCount.Value;
+            if(minCardsInHand.HasValue)
+                _minCardsInHand = minCardsInHand.Value;
+            if(maxCardsInHand.HasValue)
+                _maxCardsInHand = maxCardsInHand.Value;
 
             _drawChanceArray = new double[_maxCardCount + 1][][]; //0 to 28
             _cardsInHandProbabilityArray = new double[_maxCardCount + 1][][];
